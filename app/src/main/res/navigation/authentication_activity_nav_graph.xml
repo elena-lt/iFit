@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/authentication_activity_nav_graph"
+            app:startDestination="@id/loginFragment">
+    <fragment android:id="@+id/loginFragment" android:name="com.example.ifit.ui.authentication.LoginFragment"
+              android:label="fragment_login" tools:layout="@layout/fragment_login">
+        <action android:id="@+id/action_loginFragment_to_joinUsFragment" app:destination="@id/joinUsFragment"/>
+
+    </fragment>
+    <fragment android:id="@+id/joinUsFragment" android:name="com.example.ifit.ui.authentication.JoinUsFragment"
+              android:label="fragment_join_us" tools:layout="@layout/fragment_join_us">
+        <action android:id="@+id/action_joinUsFragment_to_loginFragment" app:destination="@id/loginFragment"/>
+        <action android:id="@+id/action_joinUsFragment_to_extraUserDataFragment"
+                app:destination="@id/extraUserDataFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/extraUserDataFragment"
+              android:name="com.example.ifit.ui.authentication.ExtraUserDataFragment"
+              android:label="fragment_extra_user_data" tools:layout="@layout/fragment_extra_user_data"/>
+</navigation>

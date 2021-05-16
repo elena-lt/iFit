@@ -1,0 +1,7 @@
+include ':spotify-app-remote'//include ':iFit.data'
+//include ':iFit.domain'
+include ':data'
+include ':domain'
+include ':spotify-app-remote-release-0.7.1'
+include ':app'
+rootProject.name = "iFit"

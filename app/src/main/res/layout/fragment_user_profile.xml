@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="@color/colorPrimaryDark"
+                                                   tools:context=".ui.main.profile.UserProfileFragment">
+
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginStart="10dp"
+                  android:layout_marginEnd="10dp"
+                  android:paddingEnd="10dp"
+                  android:paddingStart="10dp" app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                  android:id="@+id/linearLayout3">
+
+        <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp" android:layout_height="40dp"
+                android:background="@drawable/ic_baseline_arrow_back_ios_24"
+                tools:layout_editor_absoluteY="16dp" tools:layout_editor_absoluteX="355dp"/>
+        <com.google.android.material.textview.MaterialTextView
+                android:text="Profile"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+        <ImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="40dp" android:layout_height="40dp"
+                android:background="@drawable/ic_baseline_settings_24"
+                tools:layout_editor_absoluteY="16dp" tools:layout_editor_absoluteX="355dp"/>
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content"
+                                                       android:layout_marginTop="30dp"
+                                                       android:paddingEnd="10dp"
+                                                       android:paddingStart="10dp"
+                                                       android:paddingTop="10dp"
+                                                       android:paddingBottom="10dp"
+                                                       app:layout_constraintStart_toStartOf="parent"
+                                                       app:layout_constraintEnd_toEndOf="parent"
+                                                       app:layout_constraintHorizontal_bias="0.5"
+                                                       app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                                                       android:id="@+id/constraintLayout"
+                                                       app:layout_constraintBottom_toTopOf="@+id/constraintLayout2">
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:background="@drawable/ic_user"
+                android:layout_width="70dp" android:layout_height="70dp"
+                android:clickable="true" android:focusable="true" android:id="@+id/shapeableImageView"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView android:layout_width="wrap_content"
+                                                               android:layout_height="wrap_content"
+                                                               android:text="Hello, Name"
+                                                               android:textSize="20sp"
+                                                               android:textColor="@color/white"
+                                                               app:layout_constraintTop_toBottomOf="@+id/shapeableImageView"
+                                                               app:layout_constraintStart_toStartOf="@+id/shapeableImageView"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content"
+                                                       android:layout_marginEnd="10dp"
+                                                       android:paddingTop="15dp"
+                                                       android:paddingBottom="10dp"
+                                                       app:layout_constraintStart_toStartOf="parent"
+                                                       app:layout_constraintEnd_toEndOf="parent"
+                                                       app:layout_constraintHorizontal_bias="0.5"
+                                                       app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                                                       android:id="@+id/constraintLayout2"
+                                                       app:layout_constraintBottom_toTopOf="@+id/btnEditGoals">
+
+
+        <ProgressBar
+                style="@style/ProgressBarCircular"
+                android:indeterminate="false"
+                android:progress="60"
+                android:progressDrawable="@drawable/pie_chart_full"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/progresTime"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toStartOf="@+id/progressDistance" app:layout_constraintTop_toTopOf="parent"
+        />
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtTimeGoal"
+                android:text="5h 30min"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/progresTime"
+                app:layout_constraintTop_toTopOf="@+id/progresTime"
+                app:layout_constraintEnd_toEndOf="@+id/progresTime"
+                app:layout_constraintStart_toStartOf="@+id/progresTime"/>
+
+        <ProgressBar
+                style="@style/ProgressBarCircular"
+                android:indeterminate="false"
+                android:progress="60"
+                android:progressDrawable="@drawable/pie_chart_full"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/progressBarCalories"
+                app:layout_constraintEnd_toEndOf="@+id/progressDistance"
+                app:layout_constraintTop_toBottomOf="@+id/progressDistance"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.google.android.material.textview.MaterialTextView
+                android:text="800 kcal"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/progressBarCalories"
+                app:layout_constraintEnd_toEndOf="@+id/progressBarCalories"
+                app:layout_constraintTop_toTopOf="@+id/progressBarCalories"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBarCalories"/>
+
+        <ProgressBar
+                style="@style/ProgressBarCircular"
+                android:indeterminate="false"
+                android:progress="60"
+                android:progressDrawable="@drawable/pie_chart_full"
+                android:layout_width="150dp"
+                android:layout_height="150dp" android:id="@+id/progressDistance"
+                app:layout_constraintStart_toEndOf="@+id/progresTime"
+                app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtDistanceGoal"
+                android:text="35km"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/progressDistance"
+                app:layout_constraintTop_toTopOf="@+id/progressDistance"
+                app:layout_constraintEnd_toEndOf="@+id/progressDistance"
+                app:layout_constraintStart_toStartOf="@+id/progressDistance"/>
+
+        <ProgressBar
+                style="@style/ProgressBarCircular"
+                android:indeterminate="false"
+                android:progress="60"
+                android:progressDrawable="@drawable/pie_chart_full"
+                android:layout_width="150dp"
+                android:layout_height="150dp" android:id="@+id/progressActiveDays"
+                app:layout_constraintStart_toStartOf="@+id/progresTime"
+                app:layout_constraintTop_toBottomOf="@+id/progresTime"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtActiveDays"
+                android:text="20 days"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/progressActiveDays"
+                app:layout_constraintTop_toTopOf="@+id/progressActiveDays"
+                app:layout_constraintEnd_toEndOf="@+id/progressActiveDays"
+                app:layout_constraintStart_toStartOf="@+id/progressActiveDays"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditGoals"
+            android:text="Edit Goals"
+            android:textAllCaps="false"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

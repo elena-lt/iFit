@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1010701150037",
+    "project_id": "ifit-785fc",
+    "storage_bucket": "ifit-785fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010701150037:android:b51a54fac0a617606271dc",
+        "android_client_info": {
+          "package_name": "com.example.ifit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010701150037-h6eve9gro1ho0l32kj0lciqsb929r6ll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_vGkdM0mHnE6Vn9uAmfZpJNdS4roiv6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010701150037-h6eve9gro1ho0l32kj0lciqsb929r6ll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

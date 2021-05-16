@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content"
+                                                   android:layout_margin="5dp">
+
+
+    <ImageView
+            android:id="@+id/imgPlaylist"
+            android:layout_width="100dp" android:layout_height="100dp"
+            android:src="@drawable/ic_spotify"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="5dp"/>
+    <TextView
+            android:id="@+id/txtPlaylistName"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:text="Playlist Name"
+            android:textSize="15sp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="@+id/imgPlaylist"
+            app:layout_constraintStart_toStartOf="@+id/imgPlaylist"
+            app:layout_constraintTop_toBottomOf="@+id/imgPlaylist" app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
