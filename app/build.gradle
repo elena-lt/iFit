@@ -19,7 +19,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "Google_API_KEY", Google_API_KEY)
+        resValue "string", "Google_API_KEY", Google_API_KEY
     }
 
     buildTypes {

@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ifit.R
+import com.example.ifit.ui.main.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_run_summary.*
@@ -20,13 +22,7 @@ class RunSummaryFragment: Fragment(R.layout.fragment_run_summary) {
 
     val args: RunSummaryFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_run_summary, container, false)
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,5 +46,4 @@ class RunSummaryFragment: Fragment(R.layout.fragment_run_summary) {
             findNavController().navigate(R.id.action_runSummaryFragment_to_runFragment)
         }
     }
-
-}
+ }

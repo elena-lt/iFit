@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.ifit.R
 import com.example.ifit.models.Run
@@ -194,11 +193,11 @@ class RunTrackingFragment : Fragment(R.layout.fragment_run_tracking) {
             val avgSpeed = round(distance / time)
 
             val run = Run(it, timeStamp, avgSpeed, 0, distance, timeRun)
-            viewModel.saveRun()
+            viewModel.saveRun(it, timeStamp, avgSpeed, 0, distance, timeRun)
 
             stopTracking()
 
-            val action = RunTrackingFragmentDirections.actionRunTrackingFragmentToRunSummaryFragment(run)
+            val action = RunTrackingFragmentDirections.actionRunTrackingFragmentToRunSummaryFragment(run as com.example.ifit.models.Run)
             findNavController().navigate(action)
         }
     }

@@ -6,11 +6,9 @@ import com.example.data1.repositories.firebase.FirebaseRepositoryImp
 import com.example.data1.repositories.firebase.FirebaseSource
 import com.example.data1.repositories.firebase.FirebaseSourceImp
 import com.example.data1.utils.Const
-import com.example.domain.respositories.firebase.AuthenticationRepository
+import com.example.domain.respositories.firebase.FirebaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -70,6 +68,6 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseAuthRepository(firebaseSource: FirebaseSource): AuthenticationRepository =
+    fun provideFirebaseAuthRepository(firebaseSource: FirebaseSource): FirebaseRepository =
         FirebaseRepositoryImp(firebaseSource)
 }

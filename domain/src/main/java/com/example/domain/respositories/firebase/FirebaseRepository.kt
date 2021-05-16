@@ -1,11 +1,13 @@
 package com.example.domain.respositories.firebase
 
+import com.example.domain.models.firebase.Run
 import com.example.domain.models.firebase.User
 import com.example.domain.utils.AuthResult
+import com.example.domain.utils.Resource
 import java.util.*
 
 
-interface AuthenticationRepository {
+interface FirebaseRepository {
 
     suspend fun signInUser(email: String, password: String): AuthResult<User>
 
@@ -18,4 +20,6 @@ interface AuthenticationRepository {
     )
 
     suspend fun logoutUser(): AuthResult<User>
+
+    suspend fun saveRun(run: Run): Resource<Run>
 }
