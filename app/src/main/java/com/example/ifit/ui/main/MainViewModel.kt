@@ -28,6 +28,10 @@ class MainViewModel @Inject constructor(private val logoutUserUsecase: LogoutUse
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
+    fun saveRun(){
+
+    }
+
 
     fun logoutUser() {
         viewModelScope.launch {

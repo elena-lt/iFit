@@ -63,7 +63,7 @@ class JoinUsFragment : Fragment(R.layout.fragment_join_us) {
         })
 
         viewModel.error.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), "An error occured: $it")
+            Toast.makeText(requireContext(), "An error occurred: $it", Toast.LENGTH_SHORT).show()
         })
     }
 

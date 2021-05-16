@@ -55,6 +55,7 @@ class RunTrackingFragment : Fragment(R.layout.fragment_run_tracking) {
         }
 
         startTracking()
+
         subscribeToObservers()
 
         btnPause.setOnClickListener {
@@ -193,7 +194,7 @@ class RunTrackingFragment : Fragment(R.layout.fragment_run_tracking) {
             val avgSpeed = round(distance / time)
 
             val run = Run(it, timeStamp, avgSpeed, 0, distance, timeRun)
-            //viewModel.insertRunIntoDB(run)
+            viewModel.saveRun()
 
             stopTracking()
 

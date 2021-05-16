@@ -2,13 +2,15 @@ package com.example.data1.di
 
 import com.example.data1.mappers.FirebaseUserMapper
 import com.example.data1.network.SpotifyApi
-import com.example.data1.repositories.firebase.FirebaseAuthRepositoryImp
-import com.example.data1.repositories.firebase.FirebaseAuthSource
-import com.example.data1.repositories.firebase.FirebaseAuthSourceImp
+import com.example.data1.repositories.firebase.FirebaseRepositoryImp
+import com.example.data1.repositories.firebase.FirebaseSource
+import com.example.data1.repositories.firebase.FirebaseSourceImp
 import com.example.data1.utils.Const
 import com.example.domain.respositories.firebase.AuthenticationRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -61,11 +63,13 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideFireBaseAuthSource(firebaseAuth: FirebaseAuth, mapper: FirebaseUserMapper): FirebaseAuthSource =
-        FirebaseAuthSourceImp(firebaseAuth, mapper)
+    fun provideFireBaseAuthSource(firebaseAuth: FirebaseAuth,
+                                  firebase: FirebaseFirestore,
+                                  mapper: FirebaseUserMapper): FirebaseSource =
+        FirebaseSourceImp(firebaseAuth, firebase, mapper)
 
     @Provides
     @Singleton
-    fun provideFirebaseAuthRepository(firebaseAuthSource: FirebaseAuthSource): AuthenticationRepository =
-        FirebaseAuthRepositoryImp(firebaseAuthSource)
+    fun provideFirebaseAuthRepository(firebaseSource: FirebaseSource): AuthenticationRepository =
+        FirebaseRepositoryImp(firebaseSource)
 }

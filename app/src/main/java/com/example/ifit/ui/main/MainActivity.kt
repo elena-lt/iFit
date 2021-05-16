@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
 
     var user: FirebaseUser? = null
 
-    var accessToken: String?=null
-
 //    val authState = FirebaseAuth.AuthStateListener { state ->
 //        user = firebaseAuth.currentUser
 //        if (user == null) {

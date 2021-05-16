@@ -21,17 +21,17 @@ class ExtraUserDataFragment : Fragment(R.layout.fragment_extra_user_data) {
         btnSaveData.setOnClickListener {
             val firstName = etFirstName.text.toString().trim()
             val lastName = etLastName.text.toString().trim()
-            val dateOfBirth = etDateOfBirth.text.toString().trim()
             val weight = (etWeight.text.toString().trim()).toDouble()
 
-           saveUserData(firstName, lastName, dateOfBirth, weight)
+            saveUserData(firstName, lastName,  weight)
         }
 
-       subscribeToObservers()
+        subscribeToObservers()
     }
 
-    private fun saveUserData(firstName: String, lastName: String, dateOfBirth: String, weight: Double) {
-viewModel.saveUserData (firstName, lastName, dateOfBirth, weight)
+    private fun saveUserData(firstName: String, lastName: String,weight: Double) {
+        viewModel.saveUserData(firstName, lastName, weight)
+        moveToMainActivity()
     }
 
     private fun subscribeToObservers() {
@@ -45,7 +45,7 @@ viewModel.saveUserData (firstName, lastName, dateOfBirth, weight)
     }
 
     private fun showProgressBar() {
-       progressBar.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
 }

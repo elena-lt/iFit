@@ -11,6 +11,7 @@ import com.example.domain.usecases.firebase.SignUpUserUseCase
 import com.example.domain.utils.AuthResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -67,9 +68,9 @@ class AuthenticationViewModel @Inject constructor(
         }
     }
 
-    fun saveUserData (firstName: String, lastName: String, dateOfBirth: String, weight: Double){
+    fun saveUserData (firstName: String, lastName: String, weight: Double){
         viewModelScope.launch {
-            saveUserDataUsecase.saveUserData(firstName, lastName, )
+            saveUserDataUsecase.saveUserData(firstName, lastName, weight)
         }
     }
 

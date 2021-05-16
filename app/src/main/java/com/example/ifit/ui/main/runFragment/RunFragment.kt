@@ -27,7 +27,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     private val spotifyViewModel: SpotifyViewModel by viewModels()
 
     private var accessToken: String? = null
-    var isSpotifyAuthSuccessful: Boolean = false
+    private var isSpotifyAuthSuccessful: Boolean = false
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
