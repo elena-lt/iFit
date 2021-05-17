@@ -8,7 +8,8 @@ import com.example.domain.utils.Resource
 import javax.inject.Inject
 
 class FirebaseRepositoryImp @Inject constructor(
-    private val firebaseSource: FirebaseSource
+    private val firebaseSource: FirebaseSource,
+    private val roomDataSource: RoomDataSource
 ) : FirebaseRepository {
 
     override suspend fun signInUser(email: String, password: String) = firebaseSource.signInUser(email, password)
@@ -25,4 +26,6 @@ class FirebaseRepositoryImp @Inject constructor(
     override suspend fun logoutUser(): AuthResult<User> = firebaseSource.logout()
 
     override suspend fun saveRun(run: Run): Resource<Run> = firebaseSource.saveRun(run)
+
+    override suspend fun saveRunLocally(run: Run) = roomDataSource.saveRun(run)
 }

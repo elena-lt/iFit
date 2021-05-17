@@ -22,4 +22,7 @@ interface FirebaseRepository {
     suspend fun logoutUser(): AuthResult<User>
 
     suspend fun saveRun(run: Run): Resource<Run>
+
+    suspend fun saveRunLocally(run: Run)
+
 }
