@@ -2,7 +2,11 @@ package com.example.data1.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.data1.database.RunDao
 import com.example.data1.database.RunDatabase
+import com.example.data1.repositories.firebase.RoomDataSource
+import com.example.data1.repositories.firebase.RoomDataSourceImp
 import com.example.data1.utils.Const
 import dagger.Module
 import dagger.Provides
@@ -24,4 +28,8 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideDao (db: RunDatabase) = db.runDao()
+
+    @Provides
+    @Singleton
+    fun provideRoomDataSource (db: RunDao): RoomDataSource = RoomDataSourceImp(db)
 }

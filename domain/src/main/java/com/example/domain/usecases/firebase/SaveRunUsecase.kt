@@ -17,7 +17,7 @@ class SaveRunUsecase @Inject constructor (private val repository: FirebaseReposi
         timeRun: Long
     ) {
 
-        val run = Run(bitmap, timeStamp, avgSpeed, caloriesBurned, distance, timeRun)
+        val run = Run(bitmap,  timeStamp, avgSpeed, caloriesBurned, distance, timeRun)
         repository.saveRun(run)
         repository.saveRunLocally(run)
     }

@@ -1,11 +1,10 @@
 package com.example.domain.respositories.firebase
 
 import com.example.domain.models.firebase.Run
+import com.example.domain.models.firebase.RunHistory
 import com.example.domain.models.firebase.User
 import com.example.domain.utils.AuthResult
 import com.example.domain.utils.Resource
-import java.util.*
-
 
 interface FirebaseRepository {
 
@@ -24,5 +23,7 @@ interface FirebaseRepository {
     suspend fun saveRun(run: Run): Resource<Run>
 
     suspend fun saveRunLocally(run: Run)
+
+    suspend fun loadRunHistory(email: String): Resource<RunHistory>
 
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ifit.R
+import com.example.ifit.models.FirebaseRun
 import com.example.ifit.models.Run
 import com.example.ifit.other.TimerUtil
 import kotlinx.android.synthetic.main.item_run.view.*
@@ -20,19 +21,19 @@ class RunHistoryAdapter : RecyclerView.Adapter<RunHistoryAdapter.RunViewHolder>(
 
     }
 
-    private val diffUtil = object : DiffUtil.ItemCallback<Run>(){
-        override fun areItemsTheSame(oldItem: Run, newItem: Run): Boolean {
+    private val diffUtil = object : DiffUtil.ItemCallback<FirebaseRun>(){
+        override fun areItemsTheSame(oldItem: FirebaseRun, newItem: FirebaseRun): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Run, newItem: Run): Boolean {
+        override fun areContentsTheSame(oldItem: FirebaseRun, newItem: FirebaseRun): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
     }
     private val differ = AsyncListDiffer(this, diffUtil)
 
-    fun submitList (list: List<Run>) = differ.submitList(list)
+    fun submitList (list: List<FirebaseRun>) = differ.submitList(list)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RunViewHolder {
         return RunViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_run, parent, false))
@@ -42,7 +43,7 @@ class RunHistoryAdapter : RecyclerView.Adapter<RunHistoryAdapter.RunViewHolder>(
         val runItem = differ.currentList[position]
 
         holder.itemView.apply {
-            Glide.with(this).load(runItem.image).into(imgMapImage)
+            Glide.with(this).load(runItem.imageUrl).into(imgMapImage)
 
             val calendar = Calendar.getInstance().apply {
                 timeInMillis = runItem.timeStamp

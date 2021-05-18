@@ -1,14 +1,20 @@
 package com.example.data1.di
 
+import com.example.data1.mappers.FirebaseRunMapper
 import com.example.data1.mappers.FirebaseUserMapper
 import com.example.data1.network.SpotifyApi
 import com.example.data1.repositories.firebase.FirebaseRepositoryImp
 import com.example.data1.repositories.firebase.FirebaseSource
 import com.example.data1.repositories.firebase.FirebaseSourceImp
+import com.example.data1.repositories.firebase.RoomDataSource
 import com.example.data1.utils.Const
 import com.example.domain.respositories.firebase.FirebaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,6 +57,9 @@ class NetworkModule {
         return FirebaseAuth.getInstance()
     }
 
+//    @Provides
+//    fun provideFirebaseStorage () = Firebase.storage
+
     @Provides
     @Singleton
     fun provideFirebaseStore() = FirebaseFirestore.getInstance()
@@ -60,14 +69,20 @@ class NetworkModule {
     fun provideFirebaseUserMapper() = FirebaseUserMapper()
 
     @Provides
-    @Singleton
-    fun provideFireBaseAuthSource(firebaseAuth: FirebaseAuth,
-                                  firebase: FirebaseFirestore,
-                                  mapper: FirebaseUserMapper): FirebaseSource =
-        FirebaseSourceImp(firebaseAuth, firebase, mapper)
+    fun provideRunMapper() = FirebaseRunMapper()
 
     @Provides
     @Singleton
-    fun provideFirebaseAuthRepository(firebaseSource: FirebaseSource): FirebaseRepository =
-        FirebaseRepositoryImp(firebaseSource)
+    fun provideFireBaseAuthSource(
+        firebaseAuth: FirebaseAuth,
+        firebase: FirebaseFirestore,
+        mapper: FirebaseUserMapper,
+        runMapper: FirebaseRunMapper
+    ): FirebaseSource =
+        FirebaseSourceImp(firebaseAuth, firebase, mapper, runMapper)
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuthRepository(firebaseSource: FirebaseSource, roomDatabaseSource: RoomDataSource): FirebaseRepository =
+        FirebaseRepositoryImp(firebaseSource, roomDatabaseSource)
 }

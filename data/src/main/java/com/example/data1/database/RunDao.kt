@@ -3,7 +3,7 @@ package com.example.data1.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.example.domain.models.firebase.Run
+import com.example.data1.database.entities.Run
 
 @Dao
 interface RunDao {

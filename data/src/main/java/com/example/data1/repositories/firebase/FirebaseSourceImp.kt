@@ -1,22 +1,32 @@
 package com.example.data1.repositories.firebase
 
+import android.graphics.Bitmap
 import android.util.Log
+import com.example.data1.mappers.FirebaseRunMapper
 import com.example.data1.mappers.FirebaseUserMapper
 import com.example.data1.utils.await
 import com.example.domain.models.firebase.Run
+import com.example.domain.models.firebase.Run2
+import com.example.domain.models.firebase.RunHistory
 import com.example.domain.models.firebase.User
 import com.example.domain.utils.AuthResult
 import com.example.domain.utils.Resource
+import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.*
+import java.io.ByteArrayOutputStream
 import java.util.*
 
 class FirebaseSourceImp(
     private val firebaseAuth: FirebaseAuth,
     private var fireStore: FirebaseFirestore,
-    private val mapper: FirebaseUserMapper
+    private val mapper: FirebaseUserMapper,
+    private val runMapper: FirebaseRunMapper
 ) : FirebaseSource {
 
     companion object {
@@ -26,7 +36,6 @@ class FirebaseSourceImp(
     @ExperimentalCoroutinesApi
     override suspend fun signInUser(email: String, password: String): AuthResult<User> = withContext(Dispatchers.IO) {
         try {
-
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
 
             if (result.user != null) {
@@ -87,9 +96,16 @@ class FirebaseSourceImp(
         var dataPosted = false
         var error = ""
 
+        val url = saveImgToFirestore(run.image!!, run.timeStamp)
+
+        Log.d(TAG, "Image URL: $url")
+
+        val runToSave =
+            Run2(url, run.timeStamp, run.avgSpeed, run.caloriesBurned, run.distanceInKilometers, run.timeInMillis)
+
         try {
             val data = fireStore.collection("Users").document(firebaseAuth.currentUser?.email!!).collection("Runs")
-                .document("${run.timeStamp}").set(run).addOnCompleteListener { task ->
+                .document("${run.timeStamp}").set(runToSave).addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
                         dataPosted = true
@@ -99,14 +115,62 @@ class FirebaseSourceImp(
                     }
                 }.await()
 
-            if (dataPosted){
+            if (dataPosted) {
                 return@withContext Resource.SUCCESS(null)
-            }else{
+            } else {
                 return@withContext Resource.ERROR(error)
             }
         } catch (e: FirebaseException) {
             return@withContext Resource.ERROR(e.localizedMessage)
         }
     }
+
+    @ExperimentalCoroutinesApi
+    suspend fun saveImgToFirestore(run: Bitmap, timeStamp: Long): String {
+
+        Log.d (TAG, "Inside Save img to Firebase fun")
+
+        var url = ""
+
+        val storage = Firebase.storage.reference
+        val runImageRef = storage.child("runImages/$timeStamp.jpg")
+
+        val baos = ByteArrayOutputStream()
+        run.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        val img = baos.toByteArray()
+
+        val result = runImageRef.putBytes(img).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Log.d(TAG, "Success")
+            } else {
+                Log.d(TAG, "Error: ${it.exception?.message}")
+            }
+        }.await()
+
+        return getImageUrl(runImageRef)
+    }
+
+    @ExperimentalCoroutinesApi
+    private suspend fun getImageUrl(runImageRef: StorageReference): String {
+        var uri = ""
+        runImageRef.downloadUrl.addOnSuccessListener {
+            uri = it.toString()
+        }.await()
+
+        return uri
+    }
+
+
+    override suspend fun loadRunHistory(email: String): Resource<RunHistory> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = fireStore.collection("Users").document("$email").collection("Runs").get().await()
+                Log.d(TAG, "Result successful")
+                return@withContext Resource.SUCCESS(runMapper.toRun(result))
+            } catch (e: FirebaseException) {
+                Log.d(TAG, "ERROR: ${e.message}")
+                return@withContext Resource.ERROR(e.localizedMessage, null)
+            }
+        }
 
 }

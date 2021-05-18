@@ -12,9 +12,9 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SpotifyDataSourceImp
-   @Inject constructor(
-       private val spotifyApiService: SpotifyApi,
-       private val mapper: SpotifyApiResponseMapper
+@Inject constructor(
+    private val spotifyApiService: SpotifyApi,
+    private val mapper: SpotifyApiResponseMapper
 ) : SpotifyDataSource {
 
     override suspend fun getUserPlaylists(accessToken: String): Resource<UsersPlaylist> = withContext(Dispatchers.IO) {
@@ -31,41 +31,43 @@ class SpotifyDataSourceImp
         }
     }
 
-    override suspend fun getCurrentPlayback(accessToken: String): Resource<CurrentPlayback> = withContext(Dispatchers.IO) {
-        try {
-            val response = spotifyApiService.getCurrentPlayback(accessToken)
-            if (response.isSuccessful){
-               return@withContext Resource.SUCCESS (mapper.toCurrentPlayback(response.body()!!))
-            }else{
-                return@withContext Resource.ERROR (response.message())
+    override suspend fun getCurrentPlayback(accessToken: String): Resource<CurrentPlayback> =
+        withContext(Dispatchers.IO) {
+            try {
+                val response = spotifyApiService.getCurrentPlayback(accessToken)
+                if (response.isSuccessful) {
+                    return@withContext Resource.SUCCESS(mapper.toCurrentPlayback(response.body()!!))
+                } else {
+                    return@withContext Resource.ERROR(response.message())
+                }
+            } catch (e: Exception) {
+                return@withContext Resource.ERROR(e.localizedMessage)
             }
-        }catch (e: Exception){
-            return@withContext Resource.ERROR(e.localizedMessage)
         }
-    }
 
-    override suspend fun play(playlist: JsonObject, accessToken: String): Resource<PlayPause> = withContext(Dispatchers.IO){
-        try {
-            val response = spotifyApiService.play(playlist, accessToken)
-            if (response.isSuccessful){
-                return@withContext Resource.SUCCESS (mapper.toPlayPause(response.body()!!))
-            }else{
-                return@withContext Resource.ERROR (response.message())
+    override suspend fun play(playlist: JsonObject, accessToken: String): Resource<PlayPause> =
+        withContext(Dispatchers.IO) {
+            try {
+                val response = spotifyApiService.play(playlist, accessToken)
+                if (response.isSuccessful) {
+                    return@withContext Resource.SUCCESS(mapper.toPlayPause(response.body()!!))
+                } else {
+                    return@withContext Resource.ERROR(response.message())
+                }
+            } catch (e: Exception) {
+                return@withContext Resource.ERROR(e.localizedMessage)
             }
-        }catch (e: Exception){
-            return@withContext Resource.ERROR(e.localizedMessage)
         }
-    }
 
-    override suspend fun playNext(accessToken: String): Resource<PlayPause> = withContext(Dispatchers.IO){
+    override suspend fun playNext(accessToken: String): Resource<PlayPause> = withContext(Dispatchers.IO) {
         try {
-            val response = spotifyApiService.playNext( accessToken)
-            if (response.isSuccessful){
-                return@withContext Resource.SUCCESS (mapper.toPlayPause(response.body()!!))
-            }else{
-                return@withContext Resource.ERROR (response.message())
+            val response = spotifyApiService.playNext(accessToken)
+            if (response.isSuccessful) {
+                return@withContext Resource.SUCCESS(mapper.toPlayPause(response.body()!!))
+            } else {
+                return@withContext Resource.ERROR(response.message())
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             return@withContext Resource.ERROR(e.localizedMessage)
         }
     }
@@ -73,12 +75,12 @@ class SpotifyDataSourceImp
     override suspend fun playPrevious(accessToken: String): Resource<PlayPause> = withContext(Dispatchers.IO) {
         try {
             val response = spotifyApiService.playPrevious(accessToken)
-            if (response.isSuccessful){
-                return@withContext Resource.SUCCESS (mapper.toPlayPause(response.body()!!))
-            }else{
-                return@withContext Resource.ERROR (response.message())
+            if (response.isSuccessful) {
+                return@withContext Resource.SUCCESS(mapper.toPlayPause(response.body()!!))
+            } else {
+                return@withContext Resource.ERROR(response.message())
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             return@withContext Resource.ERROR(e.localizedMessage)
         }
     }

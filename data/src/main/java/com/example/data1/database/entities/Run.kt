@@ -10,7 +10,7 @@ data class Run(
     @PrimaryKey
     val timestamp: Long,
     val image: Bitmap? = null,
-    val avgSpeed: Long = 0L,
+    val avgSpeed: Double = 0.0,
     val caloriesBurned: Int = 0,
     val distanceInKilometers: Double = 0.0,
     val timeInMillis: Long = 0L

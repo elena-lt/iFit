@@ -6,6 +6,7 @@ import com.example.data1.repositories.spotify.SpotifyDataSource
 import com.example.data1.repositories.spotify.SpotifyDataSourceImp
 import com.example.data1.repositories.spotify.SpotifyRepositoryImp
 import com.example.domain.respositories.spotify.SpotifyRepository
+import com.example.ifit.mappers.RunMapper
 import com.example.ifit.mappers.SpotifyMapper
 import dagger.Module
 import dagger.Provides
@@ -31,4 +32,6 @@ object AppModule {
     @Provides
     fun provideMapper(): SpotifyApiResponseMapper = SpotifyApiResponseMapper()
 
+    @Provides
+    fun provideRunMapper(): RunMapper = RunMapper()
 }

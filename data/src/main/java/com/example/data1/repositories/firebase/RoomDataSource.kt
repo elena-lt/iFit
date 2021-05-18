@@ -1,7 +1,7 @@
 package com.example.data1.repositories.firebase
 
-import com.example.domain.models.firebase.Run
-import com.example.domain.respositories.firebase.FirebaseRepository
+import com.example.data1.database.entities.Run
+
 
 interface RoomDataSource {
 
